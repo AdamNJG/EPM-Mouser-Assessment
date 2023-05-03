@@ -1,19 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EMP.Mouser.Inverview.Application.Exceptions;
+using EMP.Mouser.Inverview.Application.Services;
+using EPM.Mouser.Interview.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace EPM.Mouser.Interview.Web.Controllers
 {
     public class WarehouseApi : Controller
     {
+        private readonly WarehouseService _warehouseService;
+
+        public WarehouseApi(WarehouseService warehouseService)
+        {
+            _warehouseService = warehouseService;
+        }
+
 
         /*
          *  Action: GET
          *  Url: api/warehouse/id
          *  This action should return a single product for an Id
          */
-        [HttpGet]
-        public JsonResult GetProduct(long id)
+        [HttpGet("api/warehouse/{id}")]
+        public async Task<JsonResult> GetProduct(long id)
         {
-            return Json(null);
+            try
+            {
+                return Json(await _warehouseService.GetProduct(id));
+            }
+            catch (InvalidRequestException ex)
+            {
+                return new JsonResult(ex.Message) 
+                {
+                    ContentType = "application/json",
+                    StatusCode = (int)HttpStatusCode.NotFound
+                };
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex.Message)
+                {
+                    ContentType = "application/json",
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
         }
 
         /*
@@ -22,15 +52,15 @@ namespace EPM.Mouser.Interview.Web.Controllers
          *  This action should return a collection of products in stock
          *  In stock means In Stock Quantity is greater than zero and In Stock Quantity is greater than the Reserved Quantity
          */
-        [HttpGet]
-        public JsonResult GetPublicInStockProducts()
+        [HttpGet ("api/warehouse")]
+        public async Task<JsonResult> GetPublicInStockProducts()
         {
-            return Json(null);
+            return Json(await _warehouseService.GetInstockProducts());
         }
 
 
         /*
-         *  Action: GET
+         *  Action: GET --- This should be a post as it would be adding a new record
          *  Url: api/warehouse/order
          *  This action should return a EPM.Mouser.Interview.Models.UpdateResponse
          *  This action should have handle an input parameter of EPM.Mouser.Interview.Models.UpdateQuantityRequest in JSON format in the body of the request
@@ -46,9 +76,10 @@ namespace EPM.Mouser.Interview.Web.Controllers
          *     - ErrorReason.QuantityInvalid when: A negative number was requested
          *     - ErrorReason.InvalidRequest when: A product for the id does not exist
         */
-        public JsonResult OrderItem()
+        [HttpPost ("api/warehouse/order")]
+        public async Task<JsonResult> OrderItem([FromBody]UpdateQuantityRequest updateQuantityRequest)
         {
-            return Json(null);
+            return Json(await _warehouseService.ProcessOrder(updateQuantityRequest));
         }
 
         /*
@@ -70,9 +101,10 @@ namespace EPM.Mouser.Interview.Web.Controllers
          *     - ErrorReason.QuantityInvalid when: A negative number was requested
          *     - ErrorReason.InvalidRequest when: A product for the id does not exist
         */
-        public JsonResult ShipItem()
+        [HttpPut("api/warehouse/ship")]
+        public async Task<JsonResult> ShipItem([FromBody] UpdateQuantityRequest updateQuantityRequest)
         {
-            return Json(null);
+            return Json(await _warehouseService.ShipOrder(updateQuantityRequest));
         }
 
         /*
@@ -92,9 +124,10 @@ namespace EPM.Mouser.Interview.Web.Controllers
         *     - ErrorReason.QuantityInvalid when: A negative number was requested
         *     - ErrorReason.InvalidRequest when: A product for the id does not exist
         */
-        public JsonResult RestockItem()
+        [HttpPut("api/warehouse/restock")]
+        public async Task<JsonResult> RestockItem([FromBody] UpdateQuantityRequest updateQuantityRequest)
         {
-            return Json(null);
+            return Json(await _warehouseService.Restock(updateQuantityRequest));
         }
 
         /*
@@ -125,9 +158,10 @@ namespace EPM.Mouser.Interview.Web.Controllers
         *     - ErrorReason.QuantityInvalid when: A negative number was requested for the In Stock Quantity
         *     - ErrorReason.InvalidRequest when: A blank or empty name is requested
         */
-        public JsonResult AddNewProduct()
+        [HttpPost("api/warehouse/add")]
+        public async Task<JsonResult> AddNewProduct([FromBody] Product product)
         {
-            return Json(null);
+            return Json(await _warehouseService.AddItem(product));
         }
     }
 }

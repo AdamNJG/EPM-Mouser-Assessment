@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPM.Mouser.Interview.Web", "EPM.Mouser.Interview.Web\EPM.Mouser.Interview.Web.csproj", "{6FA7BEF1-96A3-44B7-A1C4-52193DB39B63}"
 EndProject
@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLL", "DLL", "{77367EA8-06E
 	ProjectSection(SolutionItems) = preProject
 		DLL\EPM.Mouser.Interview.Data.dll = DLL\EPM.Mouser.Interview.Data.dll
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMP.Mouser.Inverview.Application", "EMP.Mouser.Inverview.Application\EMP.Mouser.Inverview.Application.csproj", "{9F61E857-EDB2-4DB4-860A-42ACA962F051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMP.Mouser.Interview.Tests", "WarehouseTests\EMP.Mouser.Interview.Tests.csproj", "{E6FE89D8-A18F-4ED9-8F2F-FAB1C658041F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +24,14 @@ Global
 		{6FA7BEF1-96A3-44B7-A1C4-52193DB39B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FA7BEF1-96A3-44B7-A1C4-52193DB39B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FA7BEF1-96A3-44B7-A1C4-52193DB39B63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F61E857-EDB2-4DB4-860A-42ACA962F051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F61E857-EDB2-4DB4-860A-42ACA962F051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F61E857-EDB2-4DB4-860A-42ACA962F051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F61E857-EDB2-4DB4-860A-42ACA962F051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6FE89D8-A18F-4ED9-8F2F-FAB1C658041F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FE89D8-A18F-4ED9-8F2F-FAB1C658041F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FE89D8-A18F-4ED9-8F2F-FAB1C658041F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FE89D8-A18F-4ED9-8F2F-FAB1C658041F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

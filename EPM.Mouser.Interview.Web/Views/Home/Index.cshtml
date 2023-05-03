@@ -2,6 +2,15 @@
     ViewData["Title"] = "Test Page";
 }
 
+<style>
+    .out-of-stock {
+        background-color: red;
+    }
+
+    .low-stock {
+        background-color: orange;
+    }
+</style>
 
 <h1>In Stock items</h1>
 
@@ -16,3 +25,23 @@
         - Available stock (this should be orange if < 10 and red < zero)
 
 *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Total Amount in Stock</th>
+            <th>Available Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td class="@(product.InStockQuantity > 10 ? "in-stock" : (product.InStockQuantity == 0 ? "out-of-stock" : "low-stock"))">@product.InStockQuantity</td>
+                <td>@product.ReservedQuantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

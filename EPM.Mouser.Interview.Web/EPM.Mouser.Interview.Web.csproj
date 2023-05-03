@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EMP.Mouser.Inverview.Application\EMP.Mouser.Inverview.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="EPM.Mouser.Interview.Data">
       <HintPath>..\DLL\EPM.Mouser.Interview.Data.dll</HintPath>
     </Reference>
